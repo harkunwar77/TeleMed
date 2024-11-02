@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration and Login</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script>
+        function validatePassword() 
+        {
+            var password = document.getElementById("password").value;
+            var confirmPassword = document.getElementById("confirm-password").value;
+            if(password.length<8)
+            {
+                document.getElementById("error-message2").innerHTML = "Password should be atleast 8 character long!";
+                return false;
+            }
+            var specialCharRegex = /[!@#$%^&*(),.?":{}|<>]/;
+            if (!specialCharRegex.test(password)) 
+            {
+                document.getElementById("error-message2").innerHTML = "Password must contain at least one special character!";
+                return false;
+            }
+            if (password !== confirmPassword) 
+            {
+                document.getElementById("error-message").innerHTML = "Passwords do not match!";
+                return false;  //prevent form submission
+            }
+            return true;  //allow form submission if passwords match
+        }
+    </script>
+</head>
+<body>
+    <div class="background-overlay"></div>
+    <div class="container">
+        <div class="header">
+            <h1>Telemedicine Portal</h1>
+            <p>Connecting you with healthcare professionals remotely</p>
+        </div>
+        <div class="form-container">
+            <h2><i class="fas fa-user-plus"></i> User Registration</h2>
+            <form action="/register/" method="POST" onsubmit="return validatePassword()">
+                {% csrf_token %}
+                <label for="username" id="user"><i class="fas fa-user"></i> Username:</label>
+                <input type="text" id="username" name="username" required>
+
+                <label for="email" id="emai"><i class="fas fa-envelope"></i> Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="role" id="rol"><i class="fas fa-user-md"></i> Register as:</label>
+                <select id="role" name="role">
+                    <option value="patient">Patient</option>
+                    <option value="doctor">Doctor</option>
+                </select>
+                <label for="password" id="passwor"><i class="fas fa-lock"></i> Password:</label>
+                <input type="password" id="password" name="password" required>
+                <span id="error-message2" style="color:red;"></span><br><br>
+
+                <label for="confirm-password" id="confirm-passwor"><i class="fas fa-lock"></i> Confirm Password:</label>
+                <input type="password" id="confirm-password" name="confirm-password" required>
+                <span id="error-message" style="color:red;"></span><br><br>
+
+                <button type="submit">Register</button>
+                <p id ="usr">Already an user?</p><a id ="link" href="/Medapp/Registration/Login/">Login</a>
+            </form>
+        </div>  
+    
+</body>
+
+</html>

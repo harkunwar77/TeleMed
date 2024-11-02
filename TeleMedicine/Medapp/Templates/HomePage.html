@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telemedicine Platform Home</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script>
+
+        function bookAppointment()
+        {
+            window.location.href = "/appointment-options/";
+        }
+    </script>
+</head>
+<body>
+    {% csrf_token %}
+    <header>
+        <h1>Welcome to Telemedicine Platform</h1>
+        <p>Your gateway to virtual healthcare services</p>
+        <img src="{% static 'images/logo4.png' %}" alt="Appointment Icon" class="feature-homeicon">
+    </header>
+
+    <div class="features-container">
+        <!-- Appointment Booking -->
+        <div class="feature">
+            <img src="{% static 'images/appoint_icon.png' %}" alt="Appointment Icon" class="feature-icon">
+            <h2>Appointment Booking</h2>
+            <p>Patients can view available consultation times and book appointments with healthcare providers.</p>
+            <form action="{% url 'book_appoint' %}" method="POST">
+                {% csrf_token %}
+                <button type="submit">Book Appointment</button>
+            </form>
+        </div>
+
+        <!-- Health Record Upload -->
+        <div class="feature">
+            <img src="{% static 'images/health_record_icon.png' %}" alt="Health Record Icon" class="feature-icon">
+            <h2>Health Record Upload</h2>
+            <p>Upload your health records such as previous prescriptions and medical reports for doctors to review.</p>
+            <button>Upload Records</button>
+        </div>
+
+        <!-- Doctor Availability Management -->
+        <div class="feature">
+            <img src="{% static 'images/doctor.png' %}" alt="Doctor Icon" class="feature-icon">
+            <h2>Doctor Availability Management</h2>
+            <p>Doctors can manage their availability and incoming patient requests efficiently through the platform.</p>
+            <button>Manage Availability</button>
+        </div>
+
+        <!-- Prescription Generation -->
+        <div class="feature">
+            <img src="{% static 'images/prescription.jpeg' %}" alt="Prescription Icon" class="feature-icon">
+            <h2>Prescription and E-Prescription</h2>
+            <p>Doctors can issue digital prescriptions that patients can download or send to pharmacies.</p>
+            <button>Generate Prescription</button>
+        </div>
+    </div>
+</body>
+</html>
+

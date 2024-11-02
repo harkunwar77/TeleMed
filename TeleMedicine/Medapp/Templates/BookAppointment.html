@@ -1,0 +1,89 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Appointment</title>
+    <link rel="stylesheet" href="{% static 'css/booking_style.css' %}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="booking-container">
+        <h2 class="page-title">Book an Appointment</h2>        
+        <form class="booking-form">
+            <!-- Province Selection -->
+            <div class="form-group">
+                <label for="province" class="form-label">Select Province:</label>
+                <select id="province" name="province" required>
+                    <option value="" disabled selected>Choose Province</option>
+                    <option value="ontario">Ontario</option>
+                    <option value="quebec">Quebec</option>
+                    <option value="british_columbia">British Columbia</option>
+                    <option value="alberta">Alberta</option>
+                    <option value="ontario">Manitoba</option>
+                    <option value="quebec">New Brunswick</option>
+                    <option value="british_columbia">Newfoundland and Labrador</option>
+                    <option value="alberta">Nova Scotia</option>
+                    <option value="british_columbia">Prince Edward Island</option>
+                    <option value="alberta">Saskatchewan</option>
+                </select>
+            </div>
+            <!-- City Selection -->
+            <div class="form-group">
+                <label for="city" class="form-label">Select City:</label>
+                <select id="city" name="city" required>
+                    <option value="" disabled selected>Choose City</option>
+                    <option value="toronto">Toronto</option>
+        
+                </select>
+            </div>
+            <!-- Health Department Selection -->
+            <div class="form-group">
+                <label for="department" class="form-label">Select Health Department:</label>
+                <select id="department" name="department" required>
+                    <option value="" disabled selected>Choose Department</option>
+                    <option value="neurology">Neurology</option>
+                    <option value="psychiatrist">Psychiatrist</option>
+                    <option value="dentist">Dentist</option>
+                    <option value="cardiology">Cardiology</option>
+                </select>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="form-group">
+                <button type="submit" class="submit-btn">Find Appointments</button>
+            </div>
+        </form>
+    </div>
+    <script>
+        document.getElementById("province").addEventListener("change", function() {
+            const province = this.value; // Get the selected province
+            window.location.href = `get-cities/${province}/`;
+            const url = `/Medapp/BookAppointment/get-cities/${province}/`; // Ensure this matches the path you're serving from
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    const cityDropdown = document.getElementById("city");
+                    cityDropdown.innerHTML = ""; // Clear existing options
+                    // Add the default option
+                    const defaultOption = document.createElement("option");
+                    defaultOption.text = "Select a city";
+                    defaultOption.value = "";
+                    cityDropdown.add(defaultOption);
+                    
+                    // Populate the city dropdown with new options
+                    data.forEach(city => {
+                        const option = document.createElement("option");
+                        option.text = city;
+                        option.value = city; // Assuming city is a string
+                        cityDropdown.add(option);
+                    });
+                })
+                .catch(error => {
+                    console.error("Error fetching cities:", error);
+                });
+        });
+    </script>  
+</body>
+</html>
