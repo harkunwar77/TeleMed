@@ -34,13 +34,15 @@
                 <button type="submit">Book Appointment</button>
             </form>
         </div>
-
         <!-- Health Record Upload -->
         <div class="feature">
             <img src="{% static 'images/health_record_icon.png' %}" alt="Health Record Icon" class="feature-icon">
             <h2>Health Record Upload</h2>
             <p>Upload your health records such as previous prescriptions and medical reports for doctors to review.</p>
-            <button>Upload Records</button>
+            <form  action="{% url 'upload_record_redirect' %}" method="POST">
+                {% csrf_token %}
+                <button type ="submit">Records</button>
+            </form>
         </div>
 
         <!-- Doctor Availability Management -->
@@ -56,7 +58,11 @@
             <img src="{% static 'images/prescription.jpeg' %}" alt="Prescription Icon" class="feature-icon">
             <h2>Prescription and E-Prescription</h2>
             <p>Doctors can issue digital prescriptions that patients can download or send to pharmacies.</p>
+            <form  action="{% url 'upload_prescription_redirect' %}" method="POST">
+                {% csrf_token %}
             <button>Generate Prescription</button>
+        </form>
+
         </div>
     </div>
 </body>

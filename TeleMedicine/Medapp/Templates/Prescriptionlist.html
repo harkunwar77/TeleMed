@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Patient Records</title>
+    <link rel="stylesheet" href="{% static 'css/patientlist.css' %}">
+    <style>
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            font-family: Arial, sans-serif;
+        }
+        h2 {
+            color: #4CAF50;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .patient-list {
+            list-style: none;
+            padding: 0;
+        }
+        .patient-list li {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            margin: 8px 0;
+            background-color: #f4f4f9;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .patient-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #4CAF50;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+        .patient-list a {
+            color: #4CAF50;
+            text-decoration: none;
+            font-size: 18px;
+            flex-grow: 1;
+        }
+        .patient-list a:hover {
+            text-decoration: underline;
+        }
+        .info {
+            font-size: 14px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Patient Records</h2>
+        <ul class="patient-list">
+            {% for patient in patients %}
+                <li>
+                    <div class="patient-icon">{{ patient.patient_name|slice:":1" }}</div>
+                    <a href="{% url 'generate_prescription' patient.patient_name %}">{{ patient.patient_name }}</a>
+                </li>
+            {% empty %}
+                <p>No patients have uploaded documents yet.</p>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

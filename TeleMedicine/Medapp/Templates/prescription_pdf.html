@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            color: #4CAF50;
+        }
+        .prescription-details {
+            margin-top: 20px;
+        }
+        .prescription-details strong {
+            display: inline-block;
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Prescription</h1>
+    <div class="prescription-details">
+        <p><strong>Date:</strong> {{ prescription.created_at|date:"M d, Y" }}</p>
+        <p><strong>Doctor:</strong> {{ prescription.doctor_name }}</p>
+        <p><strong>Patient:</strong> {{ prescription.patient_name }}</p>
+        <p><strong>Medicine:</strong> {{ prescription.medicines }}</p>
+        <p><strong>Prescription details:</strong> {{ prescription.prescription_details }}</p>
+    </div>
+</body>
+</html>

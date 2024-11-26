@@ -1,0 +1,89 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Prescriptions</title>
+    <style>
+        /* General Reset */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f8fb;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-top: 20px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 auto;
+            max-width: 800px;
+        }
+
+        li {
+            background: linear-gradient(to bottom right, #ffffff, #e6f2f8);
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        li:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        li strong {
+            color: #2c3e50;
+            font-size: 1.1em;
+        }
+
+        li p {
+            margin: 5px 0;
+        }
+
+        a {
+            text-decoration: none;
+            color: #3498db;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        p.no-prescriptions {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 1.2em;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <h1>My Prescriptions</h1>
+    <ul>
+        {% for prescription in prescriptions %}
+            <li>
+                <p><strong>Date:</strong> {{ prescription.created_at|date:"M d, Y" }}</p>
+                <p><strong>Doctor:</strong> {{ prescription.doctor_name }}</p>
+                <p><strong>Medicine:</strong> {{ prescription.medicines }}</p>
+                <p><strong>Prescription Details:</strong> {{ prescription.prescription_details }}</p>
+                <a href="{% url 'download_prescription' prescription.id %}">Download as PDF</a>
+            </li>
+        {% empty %}
+            <p class="no-prescriptions">No prescriptions available.</p>
+        {% endfor %}
+    </ul>
+</body>
+</html>

@@ -1,0 +1,78 @@
+/* General container styling */
+.container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 10px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+/* Header styling */
+h2 {
+    color: #2a9d8f;
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 30px;
+}
+
+/* Patient list styling with horizontal cards */
+.patient-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 0;
+    list-style: none;
+}
+
+/* Patient entry card */
+.patient-list li {
+    background: linear-gradient(135deg, #e0f7fa 0%, #ffffff 100%);
+    padding: 15px 25px;
+    display: flex;
+    align-items: center;
+    border-radius: 50px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Patient entry card hover effect */
+.patient-list li:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+}
+
+/* Patient icon */
+.patient-icon {
+    background-color: #2a9d8f;
+    color: white;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    margin-right: 15px;
+}
+
+/* Patient name link */
+.patient-list li a {
+    color: #2a9d8f;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    flex-grow: 1;
+    text-align: left;
+}
+
+/* Hover effect for patient name link */
+.patient-list li a:hover {
+    color: #1b7c6a;
+    text-decoration: underline;
+}
+
+/* Additional info or date (if needed) */
+.patient-list .info {
+    font-size: 14px;
+    color: #7a7a7a;
+}
